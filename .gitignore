@@ -30,7 +30,7 @@ mlruns/
 mlartifacts/
 
 # Model artifacts
-models/
+/models/
 *.pkl
 *.joblib
 
