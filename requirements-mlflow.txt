@@ -1,0 +1,4 @@
+-r requirements.txt
+
+mlflow==2.14.1
+SQLAlchemy==2.0.31

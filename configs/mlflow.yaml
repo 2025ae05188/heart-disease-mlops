@@ -1,0 +1,4 @@
+mlflow:
+  tracking_uri: sqlite:///mlflow.db
+  experiment_name: heart-disease-classification
+  registered_model_name: heart-disease-classifier

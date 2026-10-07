@@ -1,0 +1,4 @@
+dataset:
+  name: uci-heart-disease
+  dataset_id: 45
+  target_column: num

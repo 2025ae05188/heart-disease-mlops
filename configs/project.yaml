@@ -1,0 +1,9 @@
+project:
+  name: heart-disease-mlops
+  random_state: 42
+
+paths:
+  raw_data: data/raw/heart_disease.csv
+  processed_data: data/processed/heart_disease.csv
+  models: models
+  artifacts: artifacts

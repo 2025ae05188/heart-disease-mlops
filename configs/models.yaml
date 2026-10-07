@@ -1,0 +1,38 @@
+training:
+  test_size: 0.20
+  cv_folds: 5
+  scoring: roc_auc
+
+models:
+  logistic_regression:
+    enabled: true
+
+  random_forest:
+    enabled: true
+
+tuning:
+  logistic_regression:
+    method: grid
+    parameters:
+      model__C:
+        - 0.05
+        - 0.5
+        - 2.0
+        - 20.0
+
+  random_forest:
+    method: grid
+    parameters:
+      model__n_estimators:
+        - 150
+        - 250
+      model__max_depth:
+        - 4
+        - 8
+        - 12
+      model__min_samples_split:
+        - 3
+        - 6
+      model__min_samples_leaf:
+        - 1
+        - 3
