@@ -15,53 +15,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ---------------------------------------------------------------
       # 1. Checkout repository
-      # ---------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---------------------------------------------------------------
       # 2. Setup Python
-      # ---------------------------------------------------------------
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # ---------------------------------------------------------------
       # 3. Install dependencies
-      # ---------------------------------------------------------------
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
           python -m pip install -e .
 
-      # ---------------------------------------------------------------
       # 4. Lint source code
-      # ---------------------------------------------------------------
       - name: Run Ruff
         run: |
           ruff check .
 
-      # ---------------------------------------------------------------
-      # 5. Run unit tests
-      # ---------------------------------------------------------------
+      # 5. Prepare test dataset
+      - name: Download dataset
+        run: |
+          python scripts/download_data.py
+
+      # 6. Run unit tests
       - name: Run Pytest
         run: |
           pytest
 
-      # ---------------------------------------------------------------
-      # 6. Train a fresh CI model
-      # ---------------------------------------------------------------
+      # 7. Train a fresh CI model
       - name: Train model
         run: |
           python scripts/ci_train.py
 
-      # ---------------------------------------------------------------
-      # 7. Upload CI training artifacts
-      # ---------------------------------------------------------------
+      # 8. Upload CI training artifacts
       - name: Upload training artifacts
         uses: actions/upload-artifact@v4
         with:

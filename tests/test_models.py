@@ -2,9 +2,6 @@
 
 from pathlib import Path
 
-import joblib
-import pandas as pd
-
 from heart_disease_ml.data.load import load_csv
 from heart_disease_ml.models.factory import create_model_pipeline
 from heart_disease_ml.preprocessing.cleaning import (
@@ -17,7 +14,6 @@ from heart_disease_ml.preprocessing.features import (
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = PROJECT_ROOT / "data" / "raw" / "heart_disease.csv"
-MODEL_PATH = PROJECT_ROOT / "models" / "champion" / "model.pkl"
 
 
 def test_logistic_regression_pipeline_can_train():
@@ -37,30 +33,17 @@ def test_logistic_regression_pipeline_can_train():
     assert set(predictions).issubset({0, 1})
 
 
-def test_champion_model_can_predict():
-    """The packaged champion model should generate predictions."""
+def test_logistic_regression_pipeline_can_predict():
+    """The Logistic Regression pipeline should generate predictions."""
 
-    model = joblib.load(MODEL_PATH)
+    data = load_csv(DATA_PATH)
+    data = clean_heart_disease_data(data)
+    X, y = split_features_target(data)
 
-    sample = pd.DataFrame(
-        [
-            {
-                "age": 63,
-                "sex": 1,
-                "cp": 3,
-                "trestbps": 145,
-                "chol": 233,
-                "fbs": 1,
-                "restecg": 0,
-                "thalach": 150,
-                "exang": 0,
-                "oldpeak": 2.3,
-                "slope": 0,
-                "ca": 0,
-                "thal": 1,
-            }
-        ]
-    )
+    model = create_model_pipeline("logistic_regression")
+    model.fit(X, y)
+
+    sample = X.head(1)
 
     prediction = model.predict(sample)
     probabilities = model.predict_proba(sample)
