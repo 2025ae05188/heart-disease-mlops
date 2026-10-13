@@ -1,0 +1,28 @@
+# Git and Python environments
+.git/
+.venv/
+venv/
+env/
+
+# Python cache and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage*
+htmlcov/
+
+# MLflow experiment data and local tracking database
+mlruns/
+mlartifacts/
+mlflow.db*
+artifacts/
+
+# Data and development-only files
+data/
+notebooks/
+tests/
+
+# Logs and OS metadata
+*.log
+.DS_Store

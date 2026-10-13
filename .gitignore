@@ -29,10 +29,13 @@ htmlcov/
 mlruns/
 mlartifacts/
 
-# Model artifacts
-/models/
+# Model artifacts: retain only the packaged serving champion
+/models/*
+!/models/champion/
+/models/champion/*
 *.pkl
 *.joblib
+!/models/champion/model.pkl
 
 # Data artifacts
 data/raw/*
