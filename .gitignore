@@ -68,3 +68,5 @@ mlflow.db-*
 
 # Generated experiment / CI artifacts
 artifacts/
+# Large demo recording (keep locally)
+evidences/recording.mov
